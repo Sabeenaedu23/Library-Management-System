@@ -1,0 +1,431 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f6fa;
+    color: #202b3c;
+    display: flex;
+}
+
+/* Sidebar */
+
+.sidebar {
+    width: 230px;
+    height: 100vh;
+    background: #ffffff;
+    border-right: 1px solid #e7e9ef;
+    padding: 28px 20px;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.brand h2 {
+    font-size: 20px;
+}
+
+.brand-icon {
+    background: #465c91;
+    color: white;
+    padding: 9px 13px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.menu-label {
+    margin: 55px 0 15px;
+    color: #929bad;
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+.menu-item {
+    padding: 13px;
+    display: block;
+    text-decoration: none;
+    color: #667085;
+    border-radius: 7px;
+}
+
+.menu-item.active {
+    background: #edf1fa;
+    color: #465c91;
+    font-weight: bold;
+}
+
+.sidebar-bottom {
+    margin-top: auto;
+    font-size: 10px;
+    color: #929bad;
+    line-height: 2;
+}
+
+/* Main content */
+
+.main {
+    width: calc(100% - 230px);
+    margin-left: 230px;
+    padding: 35px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.eyebrow {
+    color: #929bad;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.header h1 {
+    font-size: 27px;
+    margin-bottom: 8px;
+}
+
+.subtitle, .description {
+    color: #8992a2;
+    font-size: 13px;
+}
+
+.profile {
+    background: white;
+    border: 1px solid #e7e9ef;
+    padding: 11px 15px;
+    border-radius: 25px;
+    font-weight: bold;
+    color: #465c91;
+}
+
+.profile span {
+    color: #4c5669;
+    font-size: 12px;
+    margin-left: 5px;
+}
+
+/* Statistics */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-bottom: 22px;
+}
+
+.stat-card {
+    background: white;
+    padding: 22px;
+    border: 1px solid #e7e9ef;
+    border-radius: 10px;
+}
+
+.stat-card p {
+    color: #788296;
+    font-size: 13px;
+}
+
+.stat-card h2 {
+    font-size: 29px;
+    margin: 12px 0 5px;
+}
+
+.stat-card span {
+    color: #929bad;
+    font-size: 11px;
+}
+
+/* Main panels */
+
+.content {
+    display: grid;
+    grid-template-columns: minmax(0, 1.8fr) minmax(260px, 0.8fr);
+    gap: 18px;
+    align-items: start;
+}
+
+.panel {
+    background: white;
+    border: 1px solid #e7e9ef;
+    border-radius: 10px;
+    padding: 22px;
+}
+
+.panel-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+}
+
+.panel h2 {
+    font-size: 19px;
+}
+
+.count {
+    background: #f0f2f7;
+    padding: 7px 10px;
+    border-radius: 20px;
+    color: #6f788a;
+    font-size: 11px;
+}
+
+/* Search */
+
+.search-form {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.search-form input {
+    flex: 1;
+    min-width: 0;
+    padding: 11px;
+    border: 1px solid #e3e6ed;
+    border-radius: 6px;
+    outline: none;
+}
+
+.search-form button, .add-button {
+    background: #465c91;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 11px 15px;
+    cursor: pointer;
+}
+
+.search-form a {
+    align-self: center;
+    color: #737e92;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+/* Table */
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+th {
+    color: #929bad;
+    font-size: 10px;
+    padding: 13px 9px;
+    border-bottom: 1px solid #edf0f4;
+    white-space: nowrap;
+}
+
+td {
+    padding: 15px 9px;
+    border-bottom: 1px solid #edf0f4;
+    font-size: 12px;
+    color: #626d80;
+}
+
+td strong {
+    display: block;
+    color: #263348;
+    margin-bottom: 5px;
+}
+
+td small {
+    font-size: 10px;
+    color: #a0a7b4;
+}
+
+.status {
+    padding: 6px 9px;
+    border-radius: 5px;
+    font-size: 10px;
+}
+
+.status.available {
+    background: #eaf6ef;
+    color: #38845c;
+}
+
+.status.issued {
+    background: #fff3e5;
+    color: #b37a32;
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
+}
+
+.text-button, .delete-button {
+    border: none;
+    background: none;
+    color: #465c91;
+    cursor: pointer;
+    font-size: 11px;
+}
+
+.delete-button {
+    color: #c45b5b;
+}
+
+.empty {
+    text-align: center;
+    padding: 35px;
+}
+
+/* Add book form */
+
+.add-panel h2 {
+    margin-bottom: 9px;
+}
+
+.description {
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.add-panel label {
+    display: block;
+    font-size: 12px;
+    font-weight: bold;
+    margin: 15px 0 7px;
+}
+
+.add-panel input, .add-panel select {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #e3e6ed;
+    border-radius: 6px;
+    outline: none;
+    background: white;
+    font-size: 12px;
+}
+
+.add-panel input:focus, .add-panel select:focus {
+    border-color: #7185b4;
+}
+
+.add-button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 13px;
+}
+
+.info-box {
+    background: #f1f3fa;
+    padding: 14px;
+    border-radius: 7px;
+    margin-top: 22px;
+}
+
+.info-box strong {
+    font-size: 11px;
+    color: #465c91;
+}
+
+.info-box p {
+    font-size: 11px;
+    color: #788296;
+    line-height: 1.6;
+    margin-top: 6px;
+}
+
+/* Messages */
+
+.alert {
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    font-size: 12px;
+}
+
+.alert.success {
+    background: #eaf6ef;
+    color: #38845c;
+}
+
+.alert.error {
+    background: #fff0ef;
+    color: #b54f4f;
+}
+
+footer {
+    text-align: center;
+    color: #9ba3b1;
+    font-size: 11px;
+    margin-top: 25px;
+}
+
+/* Responsive design */
+
+@media (max-width: 1000px) {
+    .content {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 650px) {
+    .sidebar {
+        width: 65px;
+        padding: 20px 8px;
+    }
+
+    .brand h2, .menu-label, .menu-item {
+        font-size: 0;
+    }
+
+    .brand {
+        justify-content: center;
+    }
+
+    .menu-item {
+        margin-top: 30px;
+        text-align: center;
+    }
+
+    .sidebar-bottom {
+        display: none;
+    }
+
+    .main {
+        margin-left: 65px;
+        width: calc(100% - 65px);
+        padding: 20px 12px;
+    }
+
+    .header h1 {
+        font-size: 21px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .profile {
+        font-size: 0;
+    }
+
+    .panel {
+        padding: 14px;
+    }
+}

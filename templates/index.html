@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Library Management System</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="sidebar">
+    <div class="brand">
+        <div class="brand-icon">L</div>
+        <h2>LibraDesk</h2>
+    </div>
+
+    <p class="menu-label">MAIN MENU</p>
+
+    <a href="/" class="menu-item active">▦ Dashboard</a>
+
+    <div class="sidebar-bottom">
+        <p>LIBRARY MANAGEMENT</p>
+        <small>Organize your collection.</small>
+    </div>
+</div>
+
+
+<main class="main">
+
+    <header class="header">
+        <div>
+            <p class="eyebrow">LIBRARY WORKSPACE</p>
+            <h1>Library Dashboard</h1>
+            <p class="subtitle">
+                Manage your books and keep your collection organized.
+            </p>
+        </div>
+
+        <div class="profile">L <span>Administrator</span></div>
+    </header>
+
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+            <div class="alert {{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endwith %}
+
+
+    <section class="stats">
+
+        <div class="stat-card">
+            <p>Total Books</p>
+            <h2>{{ stats.total }}</h2>
+            <span>Books in collection</span>
+        </div>
+
+        <div class="stat-card">
+            <p>Available Books</p>
+            <h2>{{ stats.available }}</h2>
+            <span>Ready to borrow</span>
+        </div>
+
+        <div class="stat-card">
+            <p>Issued Books</p>
+            <h2>{{ stats.issued }}</h2>
+            <span>Currently borrowed</span>
+        </div>
+
+    </section>
+
+
+    <section class="content">
+
+        <div class="panel books-panel">
+
+            <div class="panel-heading">
+                <div>
+                    <p class="eyebrow">COLLECTION</p>
+                    <h2>Book Inventory</h2>
+                </div>
+                <span class="count">{{ books|length }} books</span>
+            </div>
+
+
+            <form action="/" method="GET" class="search-form">
+                <input
+                    type="search"
+                    name="search"
+                    placeholder="Search by title, author or ISBN..."
+                    value="{{ search }}"
+                >
+                <button type="submit">Search</button>
+                <a href="/">Clear</a>
+            </form>
+
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>BOOK TITLE</th>
+                            <th>AUTHOR</th>
+                            <th>CATEGORY</th>
+                            <th>STATUS</th>
+                            <th>ACTION</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                    {% for book in books %}
+                        <tr>
+                            <td>
+                                <strong>{{ book.title }}</strong>
+                                <small>ISBN: {{ book.isbn or 'Not provided' }}</small>
+                            </td>
+
+                            <td>{{ book.author }}</td>
+
+                            <td>{{ book.category or 'General' }}</td>
+
+                            <td>
+                                <span class="status {{ book.status|lower }}">
+                                    {{ book.status }}
+                                </span>
+                            </td>
+
+                            <td>
+                                <div class="actions">
+
+                                    <form action="{{ url_for('status', book_id=book.id) }}"
+                                          method="POST">
+
+                                        <input type="hidden"
+                                               name="status"
+                                               value="{{ 'Issued' if book.status == 'Available' else 'Available' }}">
+
+                                        <button class="text-button" type="submit">
+                                            {{ 'Issue' if book.status == 'Available' else 'Return' }}
+                                        </button>
+                                    </form>
+
+                                    <form action="{{ url_for('delete', book_id=book.id) }}"
+                                          method="POST"
+                                          onsubmit="return confirm('Delete this book?')">
+
+                                        <button class="delete-button" type="submit">
+                                            Delete
+                                        </button>
+                                    </form>
+
+                                </div>
+                            </td>
+                        </tr>
+
+                    {% else %}
+                        <tr>
+                            <td colspan="5" class="empty">
+                                No books found. Add your first book.
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+
+        <aside class="panel add-panel">
+
+            <p class="eyebrow">NEW ENTRY</p>
+            <h2>Add a Book</h2>
+
+            <p class="description">
+                Enter the book details to add it to your library.
+            </p>
+
+            <form action="/add" method="POST" id="bookForm">
+
+                <label>Book Title</label>
+                <input type="text" name="title"
+                       placeholder="Enter book title" required>
+
+                <label>Author</label>
+                <input type="text" name="author"
+                       placeholder="Enter author name" required>
+
+                <label>ISBN</label>
+                <input type="text" name="isbn"
+                       placeholder="Enter ISBN number">
+
+                <label>Category</label>
+                <select name="category">
+                    <option value="">Select category</option>
+                    <option>Technology</option>
+                    <option>Science</option>
+                    <option>Fiction</option>
+                    <option>Education</option>
+                    <option>History</option>
+                    <option>Business</option>
+                    <option>General</option>
+                </select>
+
+                <button type="submit" class="add-button">
+                    + Add Book
+                </button>
+
+            </form>
+
+            <div class="info-box">
+                <strong>Note</strong>
+                <p>
+                    Use the Issue and Return actions to update
+                    the availability of each book.
+                </p>
+            </div>
+
+        </aside>
+
+    </section>
+
+
+    <footer>
+        LibraDesk Library Management System
+        <span>•</span> Built with Python and SQLite
+    </footer>
+
+</main>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
