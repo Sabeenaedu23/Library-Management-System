@@ -23,7 +23,7 @@ This project was developed to strengthen my practical knowledge of Python, Flask
 
 1. Clone this repository:
    ```bash
-   git clone YOUR_GITHUB_REPOSITORY_URL
+  https://sabeenaedu23.github.io/Library-Management-System/
    ```
 2. Navigate to the project folder:
    ```bash
